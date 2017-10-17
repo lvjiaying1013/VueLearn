@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue2</title>
+	<style>
+		header{width: 450px;margin: 0 auto;}
+		button{width: 150px;background: green;color:#fff;height: 36px;line-height: 36px;}
+		.col{background: pink}
+	</style>
+</head>
+<body>
+	<header id="app">
+				<button v-for="(item,index ) in obj"   @click='fn(index)' :class="{col:item.bol}">{{ item.name }}</button>
+				<p align="center">You choose {{ choss }}</p>
+	</header>
+
+	<script src="vue/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				choss:'',
+				obj:[
+					{name:'HTML',bol:false},
+					{name:'CSS',bol:false},
+					{name:'JavaScript',bol:false},
+				]
+			},
+			methods:{
+				fn:function(index){
+					for( let i = this.obj.length; i--; ){
+						this.obj[i].bol = false;
+					}
+						this.obj[index].bol = true;
+						this.choss = this.obj[index].name;
+				},
+				
+			}
+		})
+	</script>
+</body>
+</html>

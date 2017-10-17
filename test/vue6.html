@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>组件</title>
+	<style>
+		.box{ display: flex;justify-content: center; border-bottom: 1px solid #eee;}
+		article{ width: 80% }
+		p:nth-of-type(1){color:rgb(172,172,172);}
+		p:nth-of-type(2){color:#ccc;}
+		img{ width: 50% ;height: 50%;margin: 18.720px 5px 0 5px;}
+		/*.article,img{ float: left; }*/
+	</style>
+</head>
+<body>
+	<div id="app">
+		<test></test>
+	</div>
+
+
+
+	<template id="text">
+		<div>
+			<section v-for = "(item,index) in data" class="box">
+			<article>
+				<h1>{{ item.head }}</h1>
+				<p>{{ item.subhead }}</p>
+				<p>{{ '作者:' +' '+ item.author }}</p>
+			</article>
+			<img :src='item.url'>
+		</section>
+		</div>
+	</template>
+
+	<script src="vue/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				
+			},
+			components:{
+				'test':{
+					template:'#text',
+					data:function  () {
+						return {
+								data:[
+									{head:'个人意见：为什么中国没有鲍勃.迪伦这样的民谣歌手',subhead:'我们这一代人的成长年代，真正的诗歌课从来都是缺席的。',author:'大象公会',url:'img/1.jpg'},
+									{head:'《金刚狼3》剪掉的.迪伦这样的民谣歌手',subhead:'真想看狼叔一直打下去，文末有小贱贱彩蛋。',author:'豆瓣',url:'img/1.jpg'}
+							]
+						}	
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.col{color: red;}
+	</style>
+</head>
+<body>
+	<div id="myapp">
+		<ul>
+			<li v-for="v of arr">{{ v }}</li>
+		</ul>
+		<ul>
+			<li v-for="(item,index) in arr2" @click="f(index)" v-bind:class='{ col:item.bol }'>{{ index+"--" }}{{ item.name }} </li>
+		</ul>
+		<h1>{{ arr }}</h1>
+		<button v-on:click = 'fn("shop")'>添加</button>
+		<button v-on:click = 'del(0)'>删除</button>
+
+
+	</div>
+
+	<script src="dist/vue.js"></script>
+	<script>
+		let vue = new Vue({
+			el:'#myapp',
+			data:{
+				arr:['111','222','333','444'],
+				
+				arr2:[
+					{id:1,name:'zhangsan',bol:false},
+					{id:2,name:'lisi',bol:false},
+					{id:3,name:'wangwu',bol:false},
+				]
+			},
+			methods:{
+				fn:function(str){
+					//在方法中调用数据 用 this
+					//this代表vue的实例
+					this.arr.push(str);
+					console.log(this)
+				},
+				del:function(index){
+					this.arr.splice(index,1)
+				},
+				f:function(index){
+					for(let i = this.arr2.length;i--;){
+						this.arr2[i].bol = false;
+					}
+						this.arr2[index].bol = true;
+				}
+					
+			}
+		})
+		
+	</script>
+</body>
+</html>

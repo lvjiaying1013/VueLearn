@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>待办事项列表</title>
+	
+	<style>
+		[v-cloak]{display: none;}
+		h1{color:orange;}
+		.content{width: 400px;margin: 30px auto;background: #eee;padding:30px;}
+		input{height: 20px;width: 400px;}
+		.btn{ width: 200px;height: 30px; line-height: 30px;border: none;border-radius: 5px;color: #fff;margin: 0 100px;}
+		.btn-primary{background: rgb(51,117,195);margin-top: 30px;}
+		.btn-danger{background: rgb(183,5,5);margin-top: 15px;}
+		.delAll{background: rgb(183,5,5);border: none;border-radius: 5px;color: #fff;width: 200px;padding: 3px;}
+		.del{background: rgb(51,117,195);border: none;border-radius: 5px;color: #fff;width:50px;padding: 3px;}
+		th,td{width: 100px;height: 30px;line-height: 30px;}
+	</style>
+</head>
+<body>
+	<div id="app" v-cloak>
+		<div class="content">
+			<h1>提醒事项</h1>
+			<hr>
+			<h4>待办日期</h2>
+			<input type="number" placeholder="请输入待办日期" v-model='date' id="date">
+			<h4>待办事项描述：</h2>
+			<input type="text" placeholder="输入待办事项描述" v-model='items' id="items"><br>
+			<button class="btn btn-primary " @click='add()'>添加</button><br>
+			<button class="btn btn-danger" @click='reset()'>重置</button>
+
+			<h3>待办事项列表</h3>
+			<table cellpadding="0" cellspacing="0" border="1px" width="400">
+				<thead>
+					<th>序号</th>
+					<th>待办日期</th>
+					<th>事项描述</th>
+					<th>操作</th>
+				</thead>
+				<tbody>
+					<tr v-for="(item,index) in arr" align="center" >
+						<td>{{ index+1 }}</td>
+						<td>{{ item.date }}</td>
+						<td>{{ item.items }}</td>
+						<td><button class="del" @click='del(index)'>删除</button></td>
+					</tr>
+				</tbody>
+				<tfoot >
+					<tr >
+						<td colspan="4" align="center"  >{{ all }}<button v-if='bol' class="delAll" @click='delAll()'>删除全部</button></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+
+	<script src="vue/vue.js"></script>
+	<!-- <script src="js/vue3.js"></script> -->
+	<script>
+		let vm = new Vue({
+	el:'#app',
+	data:{
+		all:'暂无数据',
+		bol:false,
+		date:'',
+		items:'',
+		arr:[
+			
+			
+		]
+	},
+	methods:{
+		add:function(){
+			if( this.date !== ''&& this.items !== '' ){
+				this.arr.push({date:this.date,items:this.items});
+				this.date = '';
+				this.items = '';
+				this.all = '';
+				this.bol = true;
+			}
+		},
+		reset:function(){
+				this.date = '';
+				this.items = '';
+		},
+		del:function(index){
+			this.arr.splice(index, 1)
+			
+		},
+		delAll:function(){
+			if( confirm('您确定要删除吗？') ){
+					this.arr = [];
+					this.bol = false;
+					this.all = '暂无数据'
+			}
+		}
+	}
+
+})
+	</script>
+
+	
+	
+</body>
+</html>

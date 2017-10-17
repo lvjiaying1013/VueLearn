@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义事件逆向传递</title>
+</head>
+<body>
+	<div id="app">
+		<parent></parent>
+	</div>
+	
+	<template id="parent">
+		<div>
+			<input type="text" :placeholder="msg">
+			<child @change="fn"></child>
+		</div>
+	</template>
+	
+	<template id="child">
+		<div>
+			<input type="button" value="child" @click="child()">
+		</div>
+	</template>
+	<script src="vue/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+
+			},
+			components:{
+				'parent':{
+					template:'#parent',
+					data:function(){
+						return {
+							msg:'我是parent的数据'
+						}
+					},
+					methods:{
+						fn:function(val){
+							this.msg = val;
+						}
+					},
+					components:{
+						'child':{
+							template:'#child',
+							data:function  () {
+								return {
+										message:'我是child的数据'
+								}
+							},
+							methods:{
+								child:function(){
+									this.$emit('change',this.message)
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+
+
+	</script>
+</body>
+</html>

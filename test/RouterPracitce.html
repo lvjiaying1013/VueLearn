@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>路由练习</title>
+	<style>
+		.show{
+			width: 300px;height: 300px;background:#ccc;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div>
+			<router-link to='/home'>Home</router-link>
+			<router-link to='/news'>News</router-link>
+			
+		</div>
+		<div class="show">
+			<router-view></router-view>
+		</div>
+	</div>
+	
+
+	
+	<template id="home">
+		<div>
+			<h1>Home</h1>
+		</div>
+	</template>
+	
+	<template id="news">
+		<div>
+			<h1>News</h1>
+			<router-link to='/news/0'>娱乐</router-link>
+			<router-link to='/news/1'>八卦</router-link>
+		</div>
+	</template>
+
+	<template id="newsChild">
+		<div>
+			<p>我是news的参数:{{ arr[$route.params.id] }}</p>
+		</div>
+	</template>
+	<script src="vue/vue.js"></script>
+	<script src="vue-router/vue-router.min.js"></script>
+	<script>
+		const Home = Vue.extend({
+			template:'#home'
+		}),
+
+
+		News = Vue.extend({
+			template:'#news'
+		}),
+
+		NewsChild = Vue.extend({
+			template:'#newsChild',
+			data:function(){
+				return {
+					arr:['张三','lisi']
+				}
+			}
+		}),
+
+		routes = [
+			{path:'/home',component:Home},
+			{path:'/news',component:News},
+			{path:'/news/:id',component:NewsChild},
+		],
+
+		router = new VueRouter({
+			routes
+		}),
+
+		vm = new Vue({
+			el:'#app',
+			router,
+			beforeCreate:function(){
+				this.$router.push('home')
+			}
+		});
+
+	</script>
+</body>
+</html>

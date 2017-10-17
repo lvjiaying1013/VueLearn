@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Router合写</title>
+	<style>
+		li{ list-style: none;display: inline-block;margin:20px 10px; }
+		
+		.show { width: 300px;height: 300px;background: #ccc }
+	</style>
+</head>
+<body>
+	<div id="app">
+			
+			<ul>
+				<li>
+					<router-link to='/home'>home</router-link>
+				</li>
+				<li><router-link to='/news'>news</router-link></li>
+				<li><router-link to='/hot'>hot</router-link></li>
+			</ul>
+			<div class="show">
+				<router-view></router-view>
+			</div>
+	</div> 
+	<!-- 
+	使用<router-link></router-link>代替a标签
+
+	router-link：
+		在两对尖括号中添加文本
+		to属性用来设置条状url地址
+		to = 路由配置时，routers数组中的path信息，需要填写在此处
+	<router-view></router-view>
+		用来占位
+
+	 -->
+	<script src="vue/vue.js"></script>
+	<script src="vue-router/vue-router.min.js"></script>
+	<script>
+
+		const vm = new Vue({
+			el:'#app',
+			data:{
+
+			},
+			//添加路由配置项
+			//router:路由实例（对象）
+			//router：new Vuerouter()
+			//设置路由对象的配置项
+			beforeCreate:function  () {
+				this.$router.push('home')
+			},
+			router:new VueRouter({ 
+				routes:[
+				//路径命名：'/+单词小写'
+					{path:'/home',component:{
+						template:' <h2>首页1</h2> '
+					}},
+					{path:'/news',component:{
+						template:' <h2>新闻</h2> '
+					}},
+					{path:'/hot',component:{
+						template:' <h2>热点</h2> '
+					}},
+				]
+			})
+		})
+	</script>
+</body>
+</html>

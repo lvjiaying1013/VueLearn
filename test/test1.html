@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue</title>
+</head>
+<body>
+	<!-- view 视图需要包裹一个容器 -->
+	<div id="box">
+		<!-- 页面显示部分写在box里 -->
+		<h1>{{ msg }}</h1>
+		<ul>
+			<li v-for='n in 10'>{{ n }}</li>
+		</ul>
+	</div>
+	
+
+
+
+	<script src="vue/vue.js"></script>
+	<script>
+		//创建 controller
+		//在vue中 controller 就是 vue实例
+		let vue = new Vue({
+			//{}中填写vue实例的配置项
+			el: '#box',// el 配置项是用来设置与页面的关联 el：'选择器'
+			//data 数据 （model）
+			data:{
+				msg:'hello,Vue.js!'
+			},
+			//实例中，可是设置很多配置项
+		});
+	</script>
+</body>
+</html>

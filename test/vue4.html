@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue4</title>
+	<style>
+		
+		td{height: 30px;padding-left: 5px}
+		td:nth-child(1){width:50px;}
+		td:nth-child(2){width:150px;}
+		td:nth-child(3){width:100px;}
+		tr:nth-of-type(odd){background: #ccc}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<table cellpadding="0" cellspacing="0" border="1"  align="center">
+			<tr v-for="(item,index) in arr">
+				<td>{{ index+1 }}</td>
+				<td>{{ item.name }}</td>
+				<td>{{ item.country }}</td>
+			</tr>
+		</table>
+	</div>
+	<script src="vue/vue.js"></script>
+	<script src="vue-resource/vue-resource.js"></script>
+	<script>
+	let vm = new Vue({
+		el:'#app',
+		data:{
+			arr:{},
+			url:'1.json'
+		},
+		created:function  () {
+			this.getJson()
+			// body... 
+		},
+		methods:{
+			getJson:function(){
+				this.$http.get(this.url).then((res)=>{
+				console.log(res)
+				this.arr = res.data.city
+				// this.$set('arr',res.data)
+			}).catch(function(res){
+				console.log(res.status)
+				})
+			}
+		}
+	})
+	</script>
+</body>
+</html>

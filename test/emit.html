@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义事件</title>
+</head>
+<body>
+	<div id="app">
+		<parent></parent>
+	</div>
+
+
+	<template id="p">
+		<div>
+			<h1>{{ pMsg }}</h1>
+			<!-- <h1>{{ message }}</h1> -->
+			<!-- 接受事件方法名不写小括号 -->
+			<child1 @change='getVal' ></child1>
+			<child2></child2>
+		</div>
+	</template>
+
+	<template id="c1">
+		<div @click='fn()'>
+			<h1>{{ cMsg }}</h1>
+			
+		</div>
+	</template>
+
+	<template id="c2">
+		<div>
+			<h1>{{ c2Msg }}</h1>
+		</div>
+	</template>
+	<!-- 子组件将值传递给父组件，叫逆向传值
+	需要借助 自定义事件
+
+	父组件将值传递给子组件，叫做正向传值；
+	vue.js 中允许正向传值，所以正向传值不需要条件触发，是主动的；逆向传值，是不允许的，需要主动触发（主动抛出自定义事件监听）
+	 -->
+	<script src="vue/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+
+			},
+			components:{
+				'parent':{
+					template:'#p',
+					data:function  () {
+						return {
+							pMsg:'pMSP',
+							message:''
+						}
+						 
+					},
+					methods:{
+						getVal:function(val){
+							//val 代表传递过来的值
+							this.message = val;
+							console.log(this.message)
+						}
+					},
+					components:{
+						'child1':{
+							template:'#c1',
+							data:function(){
+								return {
+									cMsg:'cMSG'
+								}
+							},
+							
+							methods:{
+								fn:function(){
+									//$emit('自定义事件名称','传递的值')
+									this.$emit('change',this.cMsg);
+
+								}
+							}
+						},
+						'child2':{
+							template:'#c2',
+							data:function(){
+								return {
+									c2Msg:'c2MSG'
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

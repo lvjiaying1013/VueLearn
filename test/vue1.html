@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue1</title>
+</head>
+<body>
+	<div id="myapp">
+		<textarea rows="10" cols="40" maxlength="100"  @input="descInput" v-model="desc" ></textarea>
+		<p>还可输入{{remnant}}字</p>
+	</div>
+
+
+	<script src="vue/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#myapp',
+			
+			data:{
+			desc:'',
+		 	remnant: 100
+			},
+			 
+			methods:{
+			 descInput(){
+			 let txtVal = this.desc.length;
+			 this.remnant = 100 - txtVal;
+			 }
+			}
+		})
+	</script>
+</body>
+</html>

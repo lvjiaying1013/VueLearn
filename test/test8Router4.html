@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>路由传参</title>
+	<script src="vue/vue.js"></script>
+	<script src="vue-router/vue-router.min.js"></script>
+	<style>
+		#show{ width: 300px;height: 300px;background: #ccc }
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p>
+			<router-link to='/home'>Home</router-link>
+			<router-link to='/news'>News</router-link>
+		</p>
+		<div id="show">
+			<router-view></router-view>
+		</div>
+	</div>
+
+
+	<template id="home">
+		<div>
+			<h2>首页</h2>
+		</div>
+	</template>
+
+
+	<template id="news">
+		<div>
+			<h2>新闻</h2>
+			<ul>
+				<li>
+					<!-- 1、2代表需要传递过去的参数 -->
+					<router-link to='/news/0'>娱乐</router-link>
+					<router-link to='/news/1'>八卦</router-link>
+
+					<!-- 传递参数：通过点击不同的router-link进行传递 -->
+				</li>
+			</ul>
+		</div>
+	</template>
+
+	<template id="nd">
+		<div>
+			<p>新闻详情页</p> 
+			<span>这是传递过来的参数：{{ arr[$route.params.id] }}</span>
+	<!-- 通过$route.params.id接受 -->
+		</div>
+	</template>
+	<script>
+		let Home = Vue.extend({
+			template:'#home'
+		});
+
+
+
+		let News = Vue.extend({
+			template:'#news'
+		});
+
+
+
+		let NewsChild = Vue.extend({
+			template:'#nd',
+			data:function(){
+				return{
+					arr:['zhanlang','tianhei','nihao ','daf']
+				}
+			}
+		});
+
+		let routes = [
+			{path:'/home',component:Home},
+			{path:'/news',component:News},
+			//二级路径/:id
+			{path:'/news/:id',component:NewsChild},
+		];
+
+		let router = new VueRouter({
+			routes
+		});
+
+		let vm = new Vue({
+			el:'#app',
+			router
+		});
+
+		router.push('/home')
+	</script>
+</body>
+</html>

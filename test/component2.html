@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>props</title>
+	<style>
+		*{padding: 0;margin:0;}
+		.headerWarp{width: 100%;background: #f7f7f7;height: 48px;border-bottom:1px solid #999;text-align: center;line-height: 48px;}
+	}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<my-head txt='书影音'></my-head>
+	</div>
+	<!-- props -->
+
+	<template id="my-head">
+		<div class="headerWarp">
+			<span>{{ txt }}</span>
+		</div>
+	</template>
+	<script src="vue/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:"#app",
+			data:{
+				
+			},
+			
+			components:{
+				'my-head':{
+					template:'#my-head',
+					props:['txt']
+				},
+				
+			}
+		});
+	</script>
+</body>
+</html>

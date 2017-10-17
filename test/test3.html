@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test3</title>
+</head>
+<body>
+	<div id="app">
+		<button @click="fn(ok)">togger</button>
+		<div v-show="ok" style="width: 100px;height: 100px;background: red;margin-top: 20px;"></div>
+	</div>
+	
+
+
+	<script src="dist/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				ok:true
+			},
+			methods:{
+				fn:function(arg){
+					return this.ok = !this.ok
+				}
+			}
+		})
+	</script>
+</body>
+</html>

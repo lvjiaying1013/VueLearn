@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>微博留言板</title>
+	<style>
+	*{padding: 0;margin: 0;}
+		ul{ list-style: none;  }
+		li{ padding: 0;margin: 0; }
+		.warp{ width: 450px;margin:20px auto;   }
+		.top{ background: skyblue; }
+		.text{ padding:20px  }
+		.bottom{ border: 1px solid #ccc }
+		.bor{ border-bottom: 1px solid #ccc ;padding: 20px;  }
+	</style>
+</head>
+<body>
+	<div id="app" class="warp">
+		<div class="top">
+			<div class="text" align="right">
+				
+				<textarea style="width: 400px" rows="10" v-model='val' @keydown.enter.prevent='add()'></textarea>
+				<p>(可按 Enter 回复) <input type="submit" value="提交评论" @click='add()' ></p>
+			</div>
+		</div>
+		 
+			<ul class="warp bottom">
+				<li class="bor" v-for=" (item,index) in arr ">
+					<p>{{ item.com }}</p> <br>
+					<p>{{ item.date |date('Y-M-D h:m:s') }}</p>
+				</li>
+			</ul> 
+			
+
+	</div>
+
+	<script src="vue/vue.js"></script>
+	<script src="vue-resource/vue-resource.js"></script>
+	<!-- <script src="js/vue5.js"></script> -->
+	<script>
+		function addZero(val){
+			return val<10?'0'+val:val;
+		};
+		Vue.filter('date',function(value,type){
+				let date = new Date(),
+				setTime = date.setTime(value),
+				dateTime = '',
+				year = date.getFullYear(),
+				mouth = addZero(date.getMonth()+1),
+				day = addZero(date.getDate()),
+				hours = addZero(date.getHours()),
+				minutes = addZero(date.getMinutes()),
+				seconds = addZero(date.getSeconds());
+
+				if(type == 'Y-M-D h:m:s'){
+					dateTime = year + '-' + mouth + '-' + day + ' ' +hours + ':' + minutes + ':' + seconds
+				}else if (type =='Y-M-D') {
+					dateTime = year + '-' + mouth + '-' + day;
+				}else if (type =='Y年M月D日 h:m:s') {
+					dateTime = year + '年' + mouth + '月' + day + '日' + ' ' +hours + ':' + minutes + ':' + seconds;
+				}
+				return dateTime;
+		});
+
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				arr:[],
+				val:'',
+				url:'data.json'
+			},
+			created:function  () {
+				// body... 
+				this.$http.get(this.url).then((res)=>{
+					this.arr = res.data.data
+				}).catch(function(res){
+					console.log(res.status)
+				})
+			},
+			methods:{
+				add:function(){
+					if( this.val !== '' ){
+						this.arr.push({ com:this.val,date:new Date().getTime() });
+						this.val = ''
+					}
+				}
+			}
+});
+	</script>
+</body>
+</html>

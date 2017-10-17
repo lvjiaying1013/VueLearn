@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件修饰符</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" @keydown.up='fn()'>
+
+	</div>
+<!-- 
+vue 中的事件对象的获取：
+	@click='fn($event)'
+	
+	事件修饰符：
+		按键修饰符：.up .down 。。。
+		语法 @keydown.修饰符='fn()'
+
+	stop:阻止冒泡
+	prevent：阻止默认行为
+ -->
+
+	<script src="vue/vue.js"></script>
+	<script src="vue-resource/vue-resource.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+
+			},
+			methods:{
+				fn:function  () {
+					// body...
+					console.log('up') 
+				}
+			}
+		})
+	</script>
+</body>
+</html>

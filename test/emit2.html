@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义事件2父传子</title>
+</head>
+<body>
+	<!-- 事件触发及接受原则：谁出发的监听，由谁接受监听 -->
+	<div id="app">
+		
+		<parent></parent>
+	</div>
+		
+	<template id="p">
+		<div>
+			<h1>parent</h1>
+			<child :message="msg"></child>
+		</div>
+	</template>
+
+	<template id="c">
+		<div >
+			<h1>child {{ message }}</h1>
+		</div>
+	</template>
+
+<script src="vue/vue.js"></script>
+<script>
+	let vm = new Vue({
+		el:'#app',
+		data:{
+
+		},
+		components:{
+			'parent':{
+				template:'#p',
+				data:function  () {
+					return {
+						msg:'我是父级',
+					}
+				},
+				components:{
+					'child':{
+						template:'#c',
+						props:['message']
+					}
+				}
+			}
+		}
+	});
+</script>
+</body>
+</html>

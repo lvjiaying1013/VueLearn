@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>todoList</title>
+	<style>
+
+		ul{list-style-type: none;padding-left:0;}
+		#box{width: 350px;margin: 30px auto;background: #eee;padding: 30px 50px;}
+		#add{width: 200px;height: 20px;margin-right: 10px;}
+		.span1{color: skyblue;}
+		.finish{color:#ccc;text-decoration: line-through;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<h1>任务列表</h1>
+		<p>任务总数：{{ arr.length }}；还有：{{ choose() }}未完成 【<span class="span1" @click="del()">完成</span>】</p>
+		<ul>
+			<li v-for="(item,index) in arr">
+				<input type="checkbox" v-model="item.bol">
+				<span v-text="item.name" v-bind:class='{finish:item.bol}' v-show="!item.edit" @click='edit(index)' ></span>
+				<input type="text" v-model="item.name" v-show='item.edit'  @blur='item.edit=false'>
+			</li>
+			
+		</ul>
+		<input type="text" v-model="msg" id="add"><button @click='add()'>添加</button>
+	</div>
+	
+
+	<script src="dist/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#box',
+			data:{
+				msg:'',
+				arr:[
+				{name:'打球',bol:false,edit:false},
+				{name:'读书',bol:false,edit:false},
+				{name:'写作',bol:false,edit:false},
+				{name:'游泳',bol:false,edit:false},
+			]
+			},
+			methods:{
+				add:function(){
+					let add = document.querySelector('#add');
+					if(add.value !== ''){
+						this.arr.push({name:this.msg, bol:false});
+						this.msg = '';
+						
+					}
+				},	
+				choose:function(){
+					let num = 0;
+					this.arr.forEach(function(item){
+						if (!item.bol){
+							num++;
+						}
+					});
+
+					return num;
+				},
+				del:function () {
+					
+					let temp = this.arr;
+					this.arr = [];
+					for( let i = temp.length; i--; ){
+						if(!temp[i].bol){
+							this.arr.push(temp[i]);
+						}
+					}
+				},
+				edit:function(index){
+					if( this.arr[index].bol ){
+						return;
+					}
+					this.arr[index].edit = true;
+				}
+				
+			}
+		})
+	</script>
+</body>
+</html>

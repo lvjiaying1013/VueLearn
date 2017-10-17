@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue仿百度搜索</title>
+	<style>
+		.col{background: #ccc}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="wd" @keydown.up.prevent='up()' @keydown.down='down()'>
+		<button @click='search()'>搜索</button>
+		<ul>
+			<li v-for="(item,index) in arr" :class="{ col: index == nowIndex }" >{{ item }}</li>
+		</ul>
+	</div>
+	<!-- 所有的li数据，都有自己的index
+	我们可以定义一个nowIndex来记录当前被选中的index比较index和nowIndex 的关系
+	如果index == nowindex，那么该条数据是被选中的数据，也就是说背景变为灰色
+	 -->
+	<script src="vue/vue.js"></script>
+	<script src="vue-resource/vue-resource.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				arr:[],
+				wd:'',
+				url:'https://sug.so.360.cn/suggest',
+				nowIndex:0
+			},
+			methods:{
+				search:function  () {
+					// body... 
+					this.$http.jsonp(this.url,{params:{word:this.wd}}).then((res)=>{
+						console.log(res.data)
+						this.arr = res.data.s
+					},function(res){
+						console.log(res.status)
+					})
+				},
+				up:function(){
+					this.nowIndex--;
+					
+					if(this.nowIndex == -1){
+						this.nowIndex = this.arr.length-1;
+						
+					}
+				},
+				down:function(){
+					this.nowIndex++;
+					
+					if(this.nowIndex > this.arr.length-1){
+						this.nowIndex = 0;
+						
+					}
+				}
+				
+			}
+		})
+	</script>
+</body>
+</html>

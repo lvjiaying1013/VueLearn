@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>V</title>
+</head>
+<body>
+	
+<ul id="box">
+	<li id="one">1</li>
+	<li id="two">2</li>
+	<li id="three">3</li>
+	<li id="four">4</li>
+</ul>
+
+		
+	
+	<script >
+
+		
+		
+	let box = document.querySelector('#box');
+		addEvent(box,'click',function(event){
+			let e = event || widows.event;
+			let target = e.target || e.srcElement;
+			if(target.nodeName.toLocaleLowerCase() == 'li'){
+				switch (target.id) {
+					case 'one':
+						alert('1')
+						break;
+					case 'two':
+						alert('2')
+						break;
+					case 'three':
+						alert('3')
+						break;
+					case 'four':
+						alert('4')
+						break;
+					
+				}
+
+			}
+		})
+	
+	function addEvent(element,type,handle){
+		if(element.addEventListener){
+			element.addEventListener(type,handle,false)
+		}else if(element.attachEvent){
+			element.attachEvent('on' + type,handle)
+		}else{
+			element['on' + type] = addEvent;
+		}
+	}
+	</script>
+</body>
+</html>

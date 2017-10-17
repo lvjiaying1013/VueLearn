@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Router分写</title>
+	<style>
+		li{ list-style: none;display: inline-block;margin:20px 10px; }
+		
+		.show { width: 300px;height: 300px;background: #ccc }
+	</style>
+</head>
+<body>
+	<div id="app">
+			
+			<ul>
+				<li><router-link to='/home'>home</router-link></li>
+				<li><router-link to='/news'>news</router-link></li>
+				<li><router-link to='/hot'>hot</router-link></li>
+			</ul>
+			<div class="show">
+				<router-view></router-view>
+			</div>
+	</div> 
+
+
+
+	<template id="home">
+		<div>
+			<h2>首页</h2>
+		<ul>
+			<li>今日热点</li>
+			<li>体育新闻</li>
+			<li>关爱八卦</li>
+		</ul>
+		</div>
+	</template>
+	<script src="vue/vue.js"></script>
+	<script src="vue-router/vue-router.min.js"></script>
+	<script>
+		//全局Vue下，有extend()方法，用来注册路由所需的模块（组件）
+		// 组件的名称首字母大写
+		let Home = Vue.extend({
+			template:'#home'
+		});
+
+
+
+		let News = Vue.extend({
+			template:'<h1>news</h1>'
+		});
+
+
+
+		let Hot = Vue.extend({
+			template:'<h1>Hot</h1>'
+		});
+		//2.配置路径信息
+		let routes = [
+		   
+			{path:'/home',component:Home},
+			{path:'/news',component:News},
+			{path:'/hot',component:Hot},
+		];
+		//3.创建一个路由对象
+		let router = new VueRouter({
+			//配置项
+			//es6 新语法：如果配置项名称与后方配置项名称相同，可以简写
+			routes
+		});
+
+		let vm = new Vue({
+			el:'#app',
+			data:{
+
+			},
+			//利用生命周期函数刷新回到首页
+			// beforeCreate:function  () {
+			// 	this.$router.push('home')
+			// },
+			//4.添加路由配置项 router：路由对象
+			router
+		})
+		//路由重定向
+		//pudh：路由对象自带方法，进行路径跳转 push（'url'）
+		//利用函数刷新回到首页
+		// router.push('home')
+	</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<!-- <test></test> -->
+		<demo></demo>
+	</div>
+	<!-- 全局组件 -->
+	<!-- <template id="test">
+		<div>
+			<h1 @click='fn()'>test</h1>
+			<p>{{ msg+' '+name }}</p>
+		</div>
+	</template> -->
+	<template id="demo">
+		<div>
+			<h1 @click = "fn()">{{ msg }}</h1>
+			<p>{{ name }}</p>
+		</div>
+	</template>
+	<script src="vue/vue.js"></script>
+	<script>
+	//全局组件
+		// Vue.component('test',{
+		// 	template:'#test',
+		// 	data:function  () {
+		// 		// body... 
+		// 		return {
+		// 			msg:'hello',
+		// 			name:'zhangsan'
+		// 		}
+		// 	},
+		// 	methods:{
+		// 		fn:function(){
+		// 			console.log(this.msg)
+		// 		}
+		// 	}
+		// })
+		let vm = new Vue({
+			el:'#app',
+			data:{
+
+			},
+			components:{
+				'demo':{
+					template:'#demo',
+					data:function  () {
+					// body... 
+						return {
+							msg:'hello',
+							name:'zhangsan'
+							}
+					},
+					methods:{
+						fn:function(){
+		 			console.log(this.msg)
+		 				}
+					}
+				},
+			}
+		});
+	</script>
+</body>
+</html>

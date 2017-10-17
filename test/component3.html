@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>父子组件</title>
+	<style>
+		*{padding: 0;margin:0;}
+		.tabar{width: 100%;height: 64px;background: #f7f7f7;border-top: 1px solid #999;position: fixed;left: 0;bottom: 0;}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<super></super>
+		
+	</div>
+	<!-- 每一个组件相当于完整的vue实例，拥有绝大多数vm实例的配置项
+
+	子组件的调用只能在父组件下调用
+	 -->
+	<template id="test">
+		<div class="tabar">
+			<h3>555</h3>
+			<sub></sub>
+		</div>
+	</template>
+
+	<template id="test2">
+		<div class="item">
+			<h1>sub</h1>
+		</div>
+	</template>
+	<script src="vue/vue.js"></script>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+
+			},
+			components:{
+				'super':{
+					template:'#test',
+					components:{
+						'sub':{
+							template:'#test2'
+						}
+					}
+				}
+			}
+			
+		});
+	</script>
+</body>
+</html>
