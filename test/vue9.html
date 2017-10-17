@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>二级路由</title>
+</head>
+<body>
+	<div id="app">
+		<h1>Router  Basic - 02</h1>
+		<router-link to='/home'>Home</router-link>
+		<router-link to='/about'>About</router-link>
+		<router-view></router-view>
+	</div>
+	
+
+	<template id="home">
+		<div>
+			<h1>Home</h1>
+			<p>hello vue router</p>
+			<div>
+				<router-link to='/home/news'>News</router-link>
+				<router-link to='/home/message'>Message</router-link>
+				<router-view></router-view>
+			</div>
+		</div>	
+	</template>
+
+	<template id="about">
+		<div>
+			<h2>About</h2>
+		</div>
+	</template>
+
+	<template id="news">
+		<div>
+			<router-link to='/news/0'>你看不到我</router-link>
+			<router-link to='/news/1'>不信你点我</router-link>
+			<router-view></router-view>
+		</div>
+	</template>
+
+	<template id="message">
+		<div>
+			<router-link to='/message/0'>你可以点点这个</router-link>
+			<router-link to='/message/1'>或者这个</router-link>
+			<router-view></router-view>
+		</div>
+	</template>
+
+	<template id='newsChild'>
+		<div>
+			<p>{{ arr[$route.params.id] }}</p>
+		</div>
+	</template>
+
+	<template id="messageChild">
+		<div>
+			<p>{{ arr[$route.params.id] }}</p>
+		</div>
+	</template>
+	<script src="vue/vue.js"></script>
+	<script src="vue-router/vue-router.min.js"></script>
+	<script>
+		const Home = Vue.extend({
+			template:'#home'
+		}),
+
+		About = Vue.extend({
+			template:'#about'
+		}),
+
+		News = Vue.extend({
+			template:'#news'
+		}),
+
+		Message = Vue.extend({
+			template:'#message'
+		}),
+
+		NewsChlid = Vue.extend({
+			template:'#newsChild',
+			data:function(){
+				return{
+					arr:['你看我都说了你看不到我你还不信','被你发现了哈哈哈']
+				}
+			}
+		}),
+
+		MessageChild = Vue.extend({
+			template:'#messageChild',
+			data:function(){
+				return{
+					arr:['然后你就会发现','这里什么都没有^_^']
+				}
+			}
+		}),
+
+
+		routes = [
+			{path:'/home',component:Home,children:[
+				{path:'news',component:News},
+				{path:'message',component:Message},
+				{path:'/news/:id',component:NewsChlid},
+				{path:'/message/:id',component:MessageChild},
+			]},
+			{path:'/about',component:About},
+		],
+
+		router = new VueRouter({
+			routes
+		}),
+
+		vm = new Vue({
+			el:'#app',
+			router,
+			beforeCreate:function(){
+				this.$router.push('home')
+			}
+		});
+	</script>
+</body>
+</html>
