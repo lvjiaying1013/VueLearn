@@ -31,7 +31,7 @@
 		methods:{
 			toggle:function(){
 				this.$emit('change',this.mark);
-				this.$router.push('/'+this.mark)
+				this.$router.push('/'+ this.mark)
 			}
 		}
 	}

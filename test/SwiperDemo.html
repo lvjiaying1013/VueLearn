@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SwiperDemo</title>
+	<link rel="stylesheet" href="swiper/css/swiper.min.css">
+	<style>
+		*{ margin: 0;padding: 0; }
+		.blue-slide{ background: blue }
+		.red-slide{ background: red }
+		.orange-slide{ background: orange }
+		.swiper-slide{ line-height: 300px;color:white;font-size: 40px;text-align: center; }
+		.swiper-pagination-bullet-active{background: white;}
+	</style>
+</head>
+<body>
+
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide blue-slide">slide1</div>
+			<div class="swiper-slide red-slide">slide2</div>
+			<div class="swiper-slide orange-slide">slide3</div>
+		</div>
+		<!-- 分页器 -->
+		<div class="swiper-pagination"></div>
+	</div>
+
+	<script src="swiper/js/swiper.min.js"></script>
+
+	<script>
+		let swiper = new Swiper('.swiper-container',{
+			loop:true,
+			autoplay:3000,
+			pagination:'.swiper-pagination'
+		})
+	</script>
+</body>
+</html>

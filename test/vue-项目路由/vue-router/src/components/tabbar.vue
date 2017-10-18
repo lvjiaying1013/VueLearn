@@ -1,6 +1,6 @@
 <template>
 	<div class="tabbar"> 
-		<Item @change='receive' txt='首页' mark='Home' :sel='select' >
+		<Item @change='receive' txt='首页' mark='home' :sel='select' >
 			<img slot='normolImg' src="../assets/images/ic_tab_home_normal.png" height="128" width="128" alt="">
 			<img slot='activelImg' src="../assets/images/ic_tab_home_active.png" height="128" width="128" alt="">
 		</Item>
@@ -42,5 +42,5 @@
 	}
 </script>
 <style>
-	.tabbar { width: 100%;height: 64px;border-top: 2px solid #eee;position: fixed;left:0;bottom:0 ;background: #eee;display: flex;justify-content: space-between;align-items: center; }
+	.tabbar { width: 100%;height: 64px;border-top: 1px solid #ccc;position: fixed;left:0;bottom:0 ;background: #eee;display: flex;justify-content: space-between;align-items: center; }
 </style>
