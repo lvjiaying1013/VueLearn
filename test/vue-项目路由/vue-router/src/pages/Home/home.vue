@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Headers bol='true'>
+		<Headers bol=true>
 			<img src="../../assets/images/ic_chat_white.png"  alt="" class="chat" slot='right'>
 			<div slot='search' class="head">
 				<input type="search" placeholder="影视 图书 唱片 小说等">
@@ -19,7 +19,7 @@
 				<img src="../../assets/images/banner/03.jpg"  alt="">
 			</div>
 		</Banner>
-		<Cell title='热点' hot='true'></Cell>
+		<Cell title='热点' hot=true></Cell>
 		
 	</div>
 </template>

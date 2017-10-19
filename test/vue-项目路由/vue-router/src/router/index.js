@@ -8,6 +8,11 @@ import Broadcast from'../pages/Broadcast/broadcast.vue'
 import Audio from'../pages/Audio/audio.vue'
 import Group from'../pages/Group/group.vue'
 import Mine from'../pages/Mine/mine.vue'
+import Tv from '../pages/Audio/tv/tv.vue'
+import Film from '../pages/Audio/film/film.vue'
+import City from '../pages/Audio/city/city.vue'
+import Book from '../pages/Audio/book/book.vue'
+import Music from '../pages/Audio/music/music.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -26,7 +31,15 @@ export default new Router({
      {
       path: '/audio',
       name: 'Audio',
-      component: Audio
+      component: Audio,
+      children:[
+        {path:'film',component:Film},
+        {path:'',component:Film},
+        {path:'tv',component:Tv},
+        {path:'city',component:City},
+        {path:'book',component:Book},
+        {path:'music',component:Music},
+      ]
     },
      {
       path: '/broadcast',

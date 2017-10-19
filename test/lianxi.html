@@ -13,69 +13,48 @@
 <body>
 	
 	<div id="app">
-		<page></page>
+		
 	</div>
 
-	<template id="page">
-		<div class="box">
-			<show :message='msg'></show>
-			<ul>
-				<li v-for="(item,index) in arr" @click='page(index)' :class='{bg:item.bol}'>{{ item.id }}</li>
-			</ul>
-		</div>  
-	</template>
 
 
-
-	<template id="show">
-		<div>
-			<h1 align="center">Update your data here:Page: {{ message }}</h1>
-		</div>
-	</template>
-
-
-	<script src="vue/vue.js"></script>
+	<!-- <script src="vue/vue.js"></script> -->
 	<script>
-		let vm = new Vue({
-			el:'#app',
-			components:{
-				'page':{
-					template:'#page',
-					data:function  () {
-						return {
-							arr:[
-								{id:1,bol:false},
-								{id:2,bol:false},
-								{id:3,bol:false},
-								{id:4,bol:false},
-								{id:5,bol:false},
-								{id:6,bol:false},
-								{id:7,bol:false},
-								{id:8,bol:false},
-								{id:9,bol:false},
-								{id:10,bol:false},
-							],
-							msg:'',
-						}
-					},
-					methods:{
-						page:function(i){
-							for( let n = this.arr.length; n--; ){
-								this.arr[n].bol = false;
-							}
-							this.msg = this.arr[i].id,
-							this.arr[i].bol = true
-						}
-					},
-					components:{
-						'show':{
-							template:'#show',
-							props:['message']
-						}
-					}
-				}
+		// let vm = new Vue({
+		// 	el:'#app',
+		// 	data:{
+
+		// 	},
+	
+			
+		// });
+
+		class Panent {
+			constructor(name,age){
+				this.name = name ;
+				this.age = age;
 			}
-		});
+			run(){
+				return this.name+'---'+this.age
+			}
+		}
+
+		let child = new Panent('zhangsan',45);
+		console.log(child.run())
+
+
+		class Child extends Panent {
+			constructor(name,age,height){
+				super(name,age);
+				this.height= height;
+			}
+			sleep(){
+				return `hello ${this.height}`
+				
+			}
+		}
+		let Child1 = new Child('lisi',15,32)
+		console.log(Child1.sleep())
 	</script>
 </body>
 </html>

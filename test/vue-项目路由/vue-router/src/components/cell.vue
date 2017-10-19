@@ -3,9 +3,11 @@
 		<div>
 			<span><slot name='Icon'></slot></span>{{ title }}
 		</div>
+		
 		<div>
 			<slot name='cell-right'></slot>	
 		</div>
+
 	</div>
 </template>
 
