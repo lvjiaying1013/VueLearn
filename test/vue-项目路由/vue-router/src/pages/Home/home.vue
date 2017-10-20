@@ -20,6 +20,12 @@
 			</div>
 		</Banner>
 		<Cell title='热点' hot=true></Cell>
+		<News v-for="(item,index) in arr">
+			<span slot='title'>{{ item.title }}</span>
+			<span slot='content'>{{ item.target.desc }}</span>
+			<span slot='auth'>{{ item.target.author.name }}</span>
+			<img :src="item.target.cover_url" alt="" slot='img' width="100px" height="100px;">
+		</News>
 		
 	</div>
 </template>
@@ -28,11 +34,31 @@
 	import Headers from '../../components/header.vue'
 	import Banner from '../../components/banner.vue'
 	import Cell from '../../components/cell.vue'
+	import News from './news_list.vue'
 	export default {
 		components:{
 			Headers,
 			Banner,
-			Cell
+			Cell,
+			News
+		},
+		data:function(){
+			return{
+				arr:[]
+			}
+		},
+		created(){
+			this.fn();
+		},
+		methods:{
+			fn(){
+				this.axios.get('/api/homeData').then((response)=>{
+					console.log(response.data.data.recommend_feeds)
+					this.arr = response.data.data.recommend_feeds;
+				}).catch((response)=>{
+					console.log(response.status)
+				})
+			}
 		}
 		
 	}

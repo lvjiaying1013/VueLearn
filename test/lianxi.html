@@ -4,57 +4,38 @@
 	<meta charset="UTF-8">
 	<title>Vue7</title>
 	<style>
-		ul{list-style: none;display: flex;justify-content: space-between;}
+		/*ul{list-style: none;display: flex;justify-content:center;}
 		.box{width: 600px;margin: 20px auto;}
 		li{ border: 1px solid #ccc;width: 50px;height: 30px; line-height: 30px;text-align: center;cursor: pointer;}
-		.bg{color:#fff;background: skyblue;}
+		.bg{color:#fff;background: skyblue;}*/
 	</style>
 </head>
 <body>
 	
-	<div id="app">
+		<div id="demo">
+		  
+		  
+		</div>
+
 		
-	</div>
-
-
-
 	<!-- <script src="vue/vue.js"></script> -->
 	<script>
-		// let vm = new Vue({
-		// 	el:'#app',
-		// 	data:{
-
-		// 	},
-	
-			
-		// });
-
-		class Panent {
-			constructor(name,age){
-				this.name = name ;
-				this.age = age;
-			}
-			run(){
-				return this.name+'---'+this.age
-			}
-		}
-
-		let child = new Panent('zhangsan',45);
-		console.log(child.run())
-
-
-		class Child extends Panent {
-			constructor(name,age,height){
-				super(name,age);
-				this.height= height;
-			}
-			sleep(){
-				return `hello ${this.height}`
-				
-			}
-		}
-		let Child1 = new Child('lisi',15,32)
-		console.log(Child1.sleep())
+				var oo = {
+					name : '贤心',
+						get sex(){
+						if(this.sexx){
+						    return this.sexx; 
+						}else{
+						    return 'man'; 
+						}
+					}, 
+						set sex(val){
+						this.sexx = val; 
+					}
+			};	
+			oo.sex = 'woman'
+			console.log(oo.sex)
 	</script>
+		
 </body>
 </html>

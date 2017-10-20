@@ -1,4 +1,4 @@
-'use strict'
+ 'use strict'
 require('./check-versions')()
 
 const config = require('../config')
@@ -22,6 +22,16 @@ const autoOpenBrowser = !!config.dev.autoOpenBrowser
 const proxyTable = config.dev.proxyTable
 
 const app = express()
+
+const homeData = require('../src/data/homeData.json')
+const apiRoutes = express.Router()
+apiRoutes.get('/homeData',function(req,res){
+  res.json({
+    data:homeData
+  })
+})
+app.use('/api',apiRoutes)
+
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {

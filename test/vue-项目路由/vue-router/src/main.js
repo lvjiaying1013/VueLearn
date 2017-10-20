@@ -3,7 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import axios from '../node_modules/axios/dist/axios.min.js'
+import VueAxios from '../node_modules/vue-axios/dist/vue-axios.min.js'
+Vue.use(VueAxios,axios)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
